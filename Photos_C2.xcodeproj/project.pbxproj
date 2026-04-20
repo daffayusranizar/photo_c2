@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		8F34B1B32F92102A00CB609D /* Photos_C2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Photos_C2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F34B1B32F92102A00CB609D /* Photos_C2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Photos_C2.app; path = "/Users/daffayuranizararrifi/Files/Apple Academy/Photos_C2/build/Debug-iphoneos/Photos_C2.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -33,16 +33,7 @@
 			isa = PBXGroup;
 			children = (
 				8F34B1B52F92102A00CB609D /* Photos_C2 */,
-				8F34B1B42F92102A00CB609D /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		8F34B1B42F92102A00CB609D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				8F34B1B32F92102A00CB609D /* Photos_C2.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,7 +86,7 @@
 			mainGroup = 8F34B1AA2F92102A00CB609D;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 8F34B1B42F92102A00CB609D /* Products */;
+			productRefGroup = 8F34B1AA2F92102A00CB609D;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
