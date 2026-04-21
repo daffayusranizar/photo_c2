@@ -23,4 +23,5 @@ struct DeviceModel: Identifiable {
     var iso: Int?
     var ev: Float?
     var shutterSpeed: Float?
+
 }

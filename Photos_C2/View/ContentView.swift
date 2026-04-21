@@ -7,7 +7,7 @@ struct ContentView: View {
                 SharedAlbumView()
             }
             Tab("Personal", systemImage: "person.crop.rectangle.stack.fill") {
-//                PersonalAlbumView()
+                PersonalAlbumView()
             }
             Tab(role: .search) { }
         }
