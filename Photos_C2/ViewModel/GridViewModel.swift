@@ -16,7 +16,7 @@ final class GridViewModel {
     private var lastColumnCount: Double = 3
     private var isPinching = false
     
-    let images = (1...100).map { "dummy_photo_\($0)" }
+    var images: [PhotoModel] = PhotoModel.personalPhotos
 
     var columns: [GridItem] {
         Array(

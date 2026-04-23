@@ -13,8 +13,8 @@ struct PhotoGridView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: viewModel.columns, spacing: 1) {
-                ForEach(viewModel.images, id: \.self) { image in
-                    PhotoGridCellView(imageName: image)
+                ForEach(viewModel.images) { image in
+                    PhotoGridCellView(imageInstance: image)
                 }
             }
         }

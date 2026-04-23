@@ -55,6 +55,78 @@ struct AlbumModel: Identifiable {
                     width: 1920,
                     height: 1080,
                     isFavorite: false
+                ),
+                PhotoModel(
+                    fileName: "photo_1",
+                    fileExtension: "heic",
+                    fileSizeInMB: 2.3,
+                    dateTime: .now,
+                    width: 1920,
+                    height: 1080,
+                    isFavorite: false
+                ),
+                PhotoModel(
+                    fileName: "photo_2",
+                    fileExtension: "heic",
+                    fileSizeInMB: 2.3,
+                    dateTime: .now,
+                    width: 1920,
+                    height: 1080,
+                    isFavorite: false
+                ),
+                PhotoModel(
+                    fileName: "photo_3",
+                    fileExtension: "heic",
+                    fileSizeInMB: 2.3,
+                    dateTime: .now,
+                    width: 1920,
+                    height: 1080,
+                    isFavorite: false
+                ),
+                PhotoModel(
+                    fileName: "photo_4",
+                    fileExtension: "heic",
+                    fileSizeInMB: 2.3,
+                    dateTime: .now,
+                    width: 1920,
+                    height: 1080,
+                    isFavorite: false
+                ),
+                PhotoModel(
+                    fileName: "photo_1",
+                    fileExtension: "heic",
+                    fileSizeInMB: 2.3,
+                    dateTime: .now,
+                    width: 1920,
+                    height: 1080,
+                    isFavorite: false
+                ),
+                PhotoModel(
+                    fileName: "photo_2",
+                    fileExtension: "heic",
+                    fileSizeInMB: 2.3,
+                    dateTime: .now,
+                    width: 1920,
+                    height: 1080,
+                    isFavorite: false
+                ),
+                PhotoModel(
+                    fileName: "photo_3",
+                    fileExtension: "heic",
+                    fileSizeInMB: 2.3,
+                    dateTime: .now,
+                    width: 1920,
+                    height: 1080,
+                    isFavorite: false
+                ),
+                PhotoModel(
+                    fileName: "photo_4",
+                    fileExtension: "heic",
+                    fileSizeInMB: 2.3,
+                    dateTime: .now,
+                    width: 1920,
+                    height: 1080,
+                    isFavorite: false
                 )
             ],
             participants: [

@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct PhotoGridCellView: View {
-    let imageName: String
+    let imageInstance: PhotoModel
 
     var body: some View {
         NavigationLink(
             destination: PhotoDetailView(
-                imageName: imageName
+                imageInstance: imageInstance
             )) {
-            Image(imageName)
+                Image(imageInstance.fileName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(minWidth: 0, maxWidth: .infinity,
@@ -27,6 +27,6 @@ struct PhotoGridCellView: View {
         }
     }
 }
-#Preview {
-    PhotoGridCellView(imageName: "dummy_photo_1")
-}
+//#Preview {
+//    PhotoGridCellView()
+//}

@@ -23,7 +23,6 @@ struct PersonalAlbumView: View {
                         Image(systemName: "line.3.horizontal.decrease")
                     }
                 }
-                
                 ToolbarSpacer(placement: .topBarTrailing)
                 
                 ToolbarItem(placement: .topBarTrailing) {
