@@ -1,18 +1,32 @@
+//
+//  SharedAlbumView.swift
+//  SharedPhotos
+//
+//  Created by Steve Agustinus on 20/04/26.
+//
+
 import SwiftUI
 
 struct SharedAlbumView: View {
+    @State var albums: [AlbumModel] = AlbumModel.albums
     let columns = [
-        GridItem(.flexible(), spacing: 12),
-        GridItem(.flexible(), spacing: 12),
-        GridItem(.flexible(), spacing: 12)
+        GridItem(.flexible(), spacing: 10),
+        GridItem(.flexible(), spacing: 10),
+        GridItem(.flexible(), spacing: 10)
     ]
+    @State private var showingNewAlbumSheet = false
+
     var body: some View {
         NavigationStack {
             ScrollView {
-                LazyVGrid(columns: columns, spacing: 16) {
-                    AlbumCard(title: "Apple Developer Academy 🍎", image: "academy_wall")
-                    AlbumCard(title: "Academy Eats!", image: "academy_food")
-                    AlbumCard(title: "Academy Bali Trips", image: "academy_bali")
+                LazyVGrid(columns: columns) {
+                    ForEach(albums) { album in
+                        NavigationLink {
+                            SharedAlbumGalleryView(album: album)
+                        } label: {
+                            AlbumCard(title: album.albumName, image: album.albumPhoto)
+                        }
+                    }
                 }
                 .padding()
             }
@@ -20,15 +34,15 @@ struct SharedAlbumView: View {
             .toolbarTitleDisplayMode(.inlineLarge)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Menu {
-                        
-                        Button { } label: {
-                            Label("View Options", systemImage: "rectangle.stack.badge.person.crop")
-                        }
+                    Button {
+                        showingNewAlbumSheet = true
                     } label: {
                         Image(systemName: "plus")
                     }
                 }
+            }
+            .sheet(isPresented: $showingNewAlbumSheet) {
+                NewSharedAlbumSheet(albums: $albums)
             }
         }
     }
@@ -40,19 +54,24 @@ struct AlbumCard: View {
 
     var body: some View {
         ZStack(alignment: .bottomLeading) {
-            // Placeholder for your image
-            RoundedRectangle(cornerRadius: 20)
-                .fill(LinearGradient(colors: [.gray, .black.opacity(0.8)], startPoint: .top, endPoint: .bottom))
-                .aspectRatio(0.7, contentMode: .fit) // Vertical card ratio
+            
+            Color.clear
+    
+            Image(image)
+                .resizable()
+                .scaledToFill()
             
             Text(title)
                 .font(.system(size: 12, weight: .bold))
                 .foregroundColor(.white)
-                .padding(10)
+                .padding(20)
                 .lineLimit(2)
+                .multilineTextAlignment(.leading)
         }
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+        .frame(minWidth: 0, maxWidth: .infinity)
+        .frame(height: 180)
+        .clipShape(RoundedRectangle(cornerRadius: 22))
+        .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 4)
     }
 }
 
