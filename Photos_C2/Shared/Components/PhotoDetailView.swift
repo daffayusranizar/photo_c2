@@ -7,14 +7,22 @@
 
 import SwiftUI
 
-import SwiftUI
 
 struct PhotoDetailView: View {
     let imageInstance: PhotoModel
+    let albumId: UUID
 
-    @Environment(GridViewModel.self) private var viewModel
+    @Environment(GridViewModel.self) private var store
     @State private var currentPhoto: PhotoModel?
     @State private var scrollPosition: UUID?
+
+    var album: AlbumModel? {
+        store.albums.first { $0.id == albumId }
+    }
+
+    var photos: [PhotoModel] {
+        album?.photos ?? []
+    }
 
     var body: some View {
         NavigationStack {
@@ -24,7 +32,7 @@ struct PhotoDetailView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .transition(.opacity) 
+                        .transition(.opacity)
                         .id(photo.id)
                 }
             }
@@ -54,7 +62,7 @@ struct PhotoDetailView: View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 4) {
-                    ForEach(viewModel.images) { photo in
+                    ForEach(photos) { photo in 
                         Image(photo.fileName)
                             .resizable()
                             .scaledToFill()
@@ -79,7 +87,7 @@ struct PhotoDetailView: View {
             .scrollTargetBehavior(.viewAligned)
             .onChange(of: scrollPosition) { _, newId in
                 guard let newId, newId != currentPhoto?.id else { return }
-                if let match = viewModel.images.first(where: { $0.id == newId }) {
+                if let match = photos.first(where: { $0.id == newId }) {  // ← use photos
                     currentPhoto = match
                 }
             }
@@ -98,20 +106,24 @@ struct PhotoDetailView: View {
         DragGesture(minimumDistance: 50, coordinateSpace: .local)
             .onEnded { value in
                 guard let current = currentPhoto,
-                      let index = viewModel.images.firstIndex(where: { $0.id == current.id }) else { return }
-                
+                      let index = photos.firstIndex(where: { $0.id == current.id }) else { return }  // ← use photos
+
                 if value.translation.width < 0 {
-                    let nextIndex = min(index + 1, viewModel.images.count - 1)
-                    currentPhoto = viewModel.images[nextIndex]
+                    let nextIndex = min(index + 1, photos.count - 1)
+                    currentPhoto = photos[nextIndex]
                 } else {
                     let prevIndex = max(index - 1, 0)
-                    currentPhoto = viewModel.images[prevIndex]
+                    currentPhoto = photos[prevIndex]
                 }
             }
     }
 }
 
 #Preview {
-    PhotoDetailView(imageInstance: PhotoModel(fileName: "dummy_photo_1", fileExtension: "jpeg", fileSizeInMB: 3.3, dateTime: .now, width: 2340, height: 1580, isFavorite: false))
-        .environment(GridViewModel())
+    let album = AlbumModel.albums.first!
+    PhotoDetailView(
+        imageInstance: album.photos.first!,
+        albumId: album.id  // ← pass albumId in preview too
+    )
+    .environment(GridViewModel())
 }

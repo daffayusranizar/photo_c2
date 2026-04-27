@@ -9,11 +9,13 @@ import SwiftUI
 
 struct PhotoGridCellView: View {
     let imageInstance: PhotoModel
+    let albumId: UUID
+    
 
     var body: some View {
         NavigationLink(
             destination: PhotoDetailView(
-                imageInstance: imageInstance
+                imageInstance: imageInstance, albumId: albumId
             )) {
                 Image(imageInstance.fileName)
                 .resizable()

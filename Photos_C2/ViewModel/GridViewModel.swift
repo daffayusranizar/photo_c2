@@ -8,7 +8,6 @@
 import SwiftUI
 
 @Observable
-@MainActor
 final class GridViewModel {
 
     var columnCount: Double = 3
@@ -17,12 +16,23 @@ final class GridViewModel {
     private var isPinching = false
     
     var images: [PhotoModel] = PhotoModel.personalPhotos
+    
+    var albums: [AlbumModel] = AlbumModel.albums
+    
 
     var columns: [GridItem] {
         Array(
             repeating: GridItem(.flexible(), spacing: 1),
             count: Int(round(columnCount))
         )
+    }
+    
+    func addAlbum(_ album: AlbumModel) {
+            albums.append(album)
+        }
+    
+    func getAlbum(byName name: String) -> AlbumModel? {
+        albums.first { $0.albumName == name }
     }
 
     var pinchGesture: some Gesture {

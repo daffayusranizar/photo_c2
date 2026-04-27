@@ -9,8 +9,9 @@
 import SwiftUI
 
 struct NewSharedAlbumSheet: View {
+    
+    @Environment(GridViewModel.self) private var store
     @Environment(\.dismiss) var dismiss
-    @Binding var albums: [AlbumModel]
     
     @State private var albumName: String = ""
     @State private var hasCoverPhoto: Bool = false
@@ -20,7 +21,6 @@ struct NewSharedAlbumSheet: View {
             Form {
                 Section {
                     Button {
-                        // Action to present photo picker for the cover
                         hasCoverPhoto.toggle()
                     } label: {
                         ZStack {
@@ -73,12 +73,13 @@ struct NewSharedAlbumSheet: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Create") {
-                        albums.insert(AlbumModel(
+                        let newAlbum = AlbumModel(
                             albumName: albumName,
                             albumPhoto: "person_2",
                             photos: [],
                             participants: []
-                        ), at: 0)
+                        )
+                        store.addAlbum(newAlbum) // ← calls the function
                         dismiss()
                     }
                     .bold()

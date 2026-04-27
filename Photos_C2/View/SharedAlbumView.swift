@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct SharedAlbumView: View {
-    @State var albums: [AlbumModel] = AlbumModel.albums
+    
+    @Environment(GridViewModel.self) private var store
+    
     let columns = [
         GridItem(.flexible(), spacing: 10),
         GridItem(.flexible(), spacing: 10),
@@ -20,7 +22,7 @@ struct SharedAlbumView: View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: columns) {
-                    ForEach(albums) { album in
+                    ForEach(store.albums) { album in
                         NavigationLink {
                             SharedAlbumGalleryView(album: album)
                         } label: {
@@ -42,7 +44,7 @@ struct SharedAlbumView: View {
                 }
             }
             .sheet(isPresented: $showingNewAlbumSheet) {
-                NewSharedAlbumSheet(albums: $albums)
+                NewSharedAlbumSheet()
             }
         }
     }
@@ -77,4 +79,5 @@ struct AlbumCard: View {
 
 #Preview {
     SharedAlbumView()
+        .environment(GridViewModel()) 
 }

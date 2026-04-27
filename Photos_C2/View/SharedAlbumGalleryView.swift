@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SharedAlbumGalleryView: View {
     @Environment(\.dismiss) var dismiss
-    @State private var viewModel = GridViewModel()
+    @Environment(GridViewModel.self) private var store
+    
     @State private var isSelectMode = false
     
     let album: AlbumModel
@@ -37,7 +38,7 @@ struct SharedAlbumGalleryView: View {
                     }
                     .padding(.bottom, 16)
                     
-                    NavigationLink(destination: PhotoSelectionView(album: album)) {
+                    NavigationLink(destination: PhotoSelectionView(albumId: album.id)) {
                         ZStack {
                             Image(album.albumPhoto)
                                 .resizable()
@@ -55,17 +56,17 @@ struct SharedAlbumGalleryView: View {
                     }
                     
                     ScrollView {
-                        LazyVGrid(columns: viewModel.columns, spacing: 1) {
+                        LazyVGrid(columns: store.columns, spacing: 1) {
                             ForEach(album.photos) { image in
                                 if isSelectMode {
                                     SelectPhotoGridCellView(imageInstance: image, isSelected: false)
                                 } else {
-                                    PhotoGridCellView(imageInstance: image)
+                                    PhotoGridCellView(imageInstance: image, albumId: album.id)
                                 }
                             }
                         }
                     }
-                    .simultaneousGesture(viewModel.pinchGesture)
+                    .simultaneousGesture(store.pinchGesture)
                 }
             }
         }
@@ -110,4 +111,5 @@ struct ParticipantAvatar: View {
 
 #Preview {
     SharedAlbumGalleryView(album: AlbumModel.albums.first!)
+        .environment(GridViewModel())
 }

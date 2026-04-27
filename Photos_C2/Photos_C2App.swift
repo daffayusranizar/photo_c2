@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct Photos_C2App: App {
+    @State private var store = GridViewModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(store)
         }
     }
 }

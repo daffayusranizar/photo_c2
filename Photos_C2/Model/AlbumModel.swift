@@ -17,7 +17,7 @@ struct AlbumModel: Identifiable {
     
     static var albums: [AlbumModel] = [
         AlbumModel(
-            albumName: "Test",
+            albumName: "Personal",
             albumPhoto: "album_1",
             photos: [
                 PhotoModel(
@@ -139,7 +139,114 @@ struct AlbumModel: Identifiable {
         AlbumModel(
             albumName: "Apple Developer Academy",
             albumPhoto: "album_1",
-            photos: [],
+            photos: [PhotoModel(
+                fileName: "photo_1",
+                fileExtension: "heic",
+                fileSizeInMB: 2.3,
+                dateTime: .now,
+                width: 1920,
+                height: 1080,
+                isFavorite: false
+            ),
+            PhotoModel(
+                fileName: "photo_2",
+                fileExtension: "heic",
+                fileSizeInMB: 2.3,
+                dateTime: .now,
+                width: 1920,
+                height: 1080,
+                isFavorite: false
+            ),
+            PhotoModel(
+                fileName: "photo_3",
+                fileExtension: "heic",
+                fileSizeInMB: 2.3,
+                dateTime: .now,
+                width: 1920,
+                height: 1080,
+                isFavorite: false
+            ),
+            PhotoModel(
+                fileName: "photo_4",
+                fileExtension: "heic",
+                fileSizeInMB: 2.3,
+                dateTime: .now,
+                width: 1920,
+                height: 1080,
+                isFavorite: false
+            ),
+            PhotoModel(
+                fileName: "photo_1",
+                fileExtension: "heic",
+                fileSizeInMB: 2.3,
+                dateTime: .now,
+                width: 1920,
+                height: 1080,
+                isFavorite: false
+            ),
+            PhotoModel(
+                fileName: "photo_2",
+                fileExtension: "heic",
+                fileSizeInMB: 2.3,
+                dateTime: .now,
+                width: 1920,
+                height: 1080,
+                isFavorite: false
+            ),
+            PhotoModel(
+                fileName: "photo_3",
+                fileExtension: "heic",
+                fileSizeInMB: 2.3,
+                dateTime: .now,
+                width: 1920,
+                height: 1080,
+                isFavorite: false
+            ),
+            PhotoModel(
+                fileName: "photo_4",
+                fileExtension: "heic",
+                fileSizeInMB: 2.3,
+                dateTime: .now,
+                width: 1920,
+                height: 1080,
+                isFavorite: false
+            ),
+            PhotoModel(
+                fileName: "photo_1",
+                fileExtension: "heic",
+                fileSizeInMB: 2.3,
+                dateTime: .now,
+                width: 1920,
+                height: 1080,
+                isFavorite: false
+            ),
+            PhotoModel(
+                fileName: "photo_2",
+                fileExtension: "heic",
+                fileSizeInMB: 2.3,
+                dateTime: .now,
+                width: 1920,
+                height: 1080,
+                isFavorite: false
+            ),
+            PhotoModel(
+                fileName: "photo_3",
+                fileExtension: "heic",
+                fileSizeInMB: 2.3,
+                dateTime: .now,
+                width: 1920,
+                height: 1080,
+                isFavorite: false
+            ),
+            PhotoModel(
+                fileName: "photo_4",
+                fileExtension: "heic",
+                fileSizeInMB: 2.3,
+                dateTime: .now,
+                width: 1920,
+                height: 1080,
+                isFavorite: false
+            )],
             participants: [
                 ParticipantModel(username: "stvea", name: "You", profilePicture: "person_1"),
                 ParticipantModel(username: "syafiq111", name: "Syafiq", profilePicture: "person_3"),
