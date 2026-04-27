@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct PersonalAlbumView: View {
-    @Environment(GridViewModel.self) private var store  // ← only one, from environment
+    @Environment(GridViewModel.self) private var store
 
     @State private var isSelectMode = false
 
     var personalAlbum: AlbumModel? {
-        store.getAlbum(byName: "Personal")  // ← computed property
+        store.getAlbum(byName: "Personal")
     }
 
     var body: some View {
         if let personalAlbum = personalAlbum {
             NavigationStack {
                 ScrollView {
-                    LazyVGrid(columns: store.columns, spacing: 1) {  // ← use store.columns
+                    LazyVGrid(columns: store.columns, spacing: 1) {
                         ForEach(personalAlbum.photos, id: \.id) { image in
                             let albumId = personalAlbum.id
                             
@@ -32,7 +32,7 @@ struct PersonalAlbumView: View {
                         }
                     }
                 }
-                .simultaneousGesture(store.pinchGesture)  // ← use store.pinchGesture
+                .simultaneousGesture(store.pinchGesture)
                 .navigationTitle("Library")
                 .toolbarTitleDisplayMode(.inlineLarge)
                 .toolbar {

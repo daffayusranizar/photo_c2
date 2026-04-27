@@ -43,7 +43,7 @@ struct NewSharedAlbumSheet: View {
                 .listRowBackground(Color.clear)
                 .listRowInsets(EdgeInsets())
                 .padding(.bottom, 10)
-                
+
                 Section {
                     TextField("Shared Album Name", text: $albumName)
                         .clearButton(text: $albumName)
@@ -52,7 +52,7 @@ struct NewSharedAlbumSheet: View {
                 }
                 Section {
                     Button {
-                        // Action to present contact picker
+                        
                     } label: {
                         Label("Add Participants", systemImage: "person.crop.circle.badge.plus")
                     }

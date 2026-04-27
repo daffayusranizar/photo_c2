@@ -27,7 +27,7 @@ struct AlbumModel: Identifiable {
                     dateTime: .now,
                     width: 1920,
                     height: 1080,
-                    isFavorite: false
+                    isReviewed: false
                 ),
                 PhotoModel(
                     fileName: "photo_2",
@@ -36,7 +36,7 @@ struct AlbumModel: Identifiable {
                     dateTime: .now,
                     width: 1920,
                     height: 1080,
-                    isFavorite: false
+                    isReviewed: false
                 ),
                 PhotoModel(
                     fileName: "photo_3",
@@ -45,7 +45,7 @@ struct AlbumModel: Identifiable {
                     dateTime: .now,
                     width: 1920,
                     height: 1080,
-                    isFavorite: false
+                    isReviewed: false
                 ),
                 PhotoModel(
                     fileName: "photo_4",
@@ -54,7 +54,7 @@ struct AlbumModel: Identifiable {
                     dateTime: .now,
                     width: 1920,
                     height: 1080,
-                    isFavorite: false
+                    isReviewed: false
                 ),
                 PhotoModel(
                     fileName: "photo_1",
@@ -63,7 +63,7 @@ struct AlbumModel: Identifiable {
                     dateTime: .now,
                     width: 1920,
                     height: 1080,
-                    isFavorite: false
+                    isReviewed: false
                 ),
                 PhotoModel(
                     fileName: "photo_2",
@@ -72,7 +72,7 @@ struct AlbumModel: Identifiable {
                     dateTime: .now,
                     width: 1920,
                     height: 1080,
-                    isFavorite: false
+                    isReviewed: false
                 ),
                 PhotoModel(
                     fileName: "photo_3",
@@ -81,7 +81,7 @@ struct AlbumModel: Identifiable {
                     dateTime: .now,
                     width: 1920,
                     height: 1080,
-                    isFavorite: false
+                    isReviewed: false
                 ),
                 PhotoModel(
                     fileName: "photo_4",
@@ -90,7 +90,7 @@ struct AlbumModel: Identifiable {
                     dateTime: .now,
                     width: 1920,
                     height: 1080,
-                    isFavorite: false
+                    isReviewed: false
                 ),
                 PhotoModel(
                     fileName: "photo_1",
@@ -99,7 +99,7 @@ struct AlbumModel: Identifiable {
                     dateTime: .now,
                     width: 1920,
                     height: 1080,
-                    isFavorite: false
+                    isReviewed: false
                 ),
                 PhotoModel(
                     fileName: "photo_2",
@@ -108,7 +108,7 @@ struct AlbumModel: Identifiable {
                     dateTime: .now,
                     width: 1920,
                     height: 1080,
-                    isFavorite: false
+                    isReviewed: false
                 ),
                 PhotoModel(
                     fileName: "photo_3",
@@ -117,7 +117,7 @@ struct AlbumModel: Identifiable {
                     dateTime: .now,
                     width: 1920,
                     height: 1080,
-                    isFavorite: false
+                    isReviewed: false
                 ),
                 PhotoModel(
                     fileName: "photo_4",
@@ -126,7 +126,7 @@ struct AlbumModel: Identifiable {
                     dateTime: .now,
                     width: 1920,
                     height: 1080,
-                    isFavorite: false
+                    isReviewed: false
                 )
             ],
             participants: [
@@ -146,7 +146,7 @@ struct AlbumModel: Identifiable {
                 dateTime: .now,
                 width: 1920,
                 height: 1080,
-                isFavorite: false
+                isReviewed: false
             ),
             PhotoModel(
                 fileName: "photo_2",
@@ -155,7 +155,7 @@ struct AlbumModel: Identifiable {
                 dateTime: .now,
                 width: 1920,
                 height: 1080,
-                isFavorite: false
+                isReviewed: false
             ),
             PhotoModel(
                 fileName: "photo_3",
@@ -164,7 +164,7 @@ struct AlbumModel: Identifiable {
                 dateTime: .now,
                 width: 1920,
                 height: 1080,
-                isFavorite: false
+                isReviewed: false
             ),
             PhotoModel(
                 fileName: "photo_4",
@@ -173,7 +173,7 @@ struct AlbumModel: Identifiable {
                 dateTime: .now,
                 width: 1920,
                 height: 1080,
-                isFavorite: false
+                isReviewed: false
             ),
             PhotoModel(
                 fileName: "photo_1",
@@ -182,7 +182,7 @@ struct AlbumModel: Identifiable {
                 dateTime: .now,
                 width: 1920,
                 height: 1080,
-                isFavorite: false
+                isReviewed: false
             ),
             PhotoModel(
                 fileName: "photo_2",
@@ -191,7 +191,7 @@ struct AlbumModel: Identifiable {
                 dateTime: .now,
                 width: 1920,
                 height: 1080,
-                isFavorite: false
+                isReviewed: false
             ),
             PhotoModel(
                 fileName: "photo_3",
@@ -200,7 +200,7 @@ struct AlbumModel: Identifiable {
                 dateTime: .now,
                 width: 1920,
                 height: 1080,
-                isFavorite: false
+                isReviewed: false
             ),
             PhotoModel(
                 fileName: "photo_4",
@@ -209,7 +209,7 @@ struct AlbumModel: Identifiable {
                 dateTime: .now,
                 width: 1920,
                 height: 1080,
-                isFavorite: false
+                isReviewed: false
             ),
             PhotoModel(
                 fileName: "photo_1",
@@ -218,7 +218,7 @@ struct AlbumModel: Identifiable {
                 dateTime: .now,
                 width: 1920,
                 height: 1080,
-                isFavorite: false
+                isReviewed: false
             ),
             PhotoModel(
                 fileName: "photo_2",
@@ -227,7 +227,7 @@ struct AlbumModel: Identifiable {
                 dateTime: .now,
                 width: 1920,
                 height: 1080,
-                isFavorite: false
+                isReviewed: false
             ),
             PhotoModel(
                 fileName: "photo_3",
@@ -236,7 +236,7 @@ struct AlbumModel: Identifiable {
                 dateTime: .now,
                 width: 1920,
                 height: 1080,
-                isFavorite: false
+                isReviewed: false
             ),
             PhotoModel(
                 fileName: "photo_4",
@@ -245,7 +245,7 @@ struct AlbumModel: Identifiable {
                 dateTime: .now,
                 width: 1920,
                 height: 1080,
-                isFavorite: false
+                isReviewed: false
             )],
             participants: [
                 ParticipantModel(username: "stvea", name: "You", profilePicture: "person_1"),

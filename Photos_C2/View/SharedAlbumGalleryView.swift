@@ -13,7 +13,7 @@ struct SharedAlbumGalleryView: View {
     
     @State private var isSelectMode = false
     
-    let album: AlbumModel
+    @State var album: AlbumModel
     @State private var columnCount: Double = 3
     @State private var lastColumnCount: Double = 3
     @State private var isPinching = false
@@ -38,7 +38,7 @@ struct SharedAlbumGalleryView: View {
                     }
                     .padding(.bottom, 16)
                     
-                    NavigationLink(destination: PhotoSelectionView(albumId: album.id)) {
+                    NavigationLink(destination: PhotoSelectionView(album: $album)) {
                         ZStack {
                             Image(album.albumPhoto)
                                 .resizable()

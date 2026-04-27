@@ -123,7 +123,7 @@ struct PhotoDetailView: View {
     let album = AlbumModel.albums.first!
     PhotoDetailView(
         imageInstance: album.photos.first!,
-        albumId: album.id  // ← pass albumId in preview too
+        albumId: album.id
     )
     .environment(GridViewModel())
 }
