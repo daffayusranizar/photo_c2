@@ -13,7 +13,7 @@ struct Photos_C2App: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(personalAlbum: .constant(AlbumModel.personalAlbums))
                 .environment(store)
         }
     }

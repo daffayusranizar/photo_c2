@@ -44,7 +44,7 @@ struct SharedAlbumView: View {
                 }
             }
             .sheet(isPresented: $showingNewAlbumSheet) {
-                NewSharedAlbumSheet()
+                CreateAlbumFormView()
             }
         }
     }

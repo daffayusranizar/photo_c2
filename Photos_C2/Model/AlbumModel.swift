@@ -15,127 +15,23 @@ struct AlbumModel: Identifiable {
     var photos: [PhotoModel]
     var participants: [ParticipantModel]
     
+    static var personalAlbums: AlbumModel = AlbumModel(
+        albumName: "Personal",
+        albumPhoto: "album_1",
+        photos: [
+            PhotoModel(
+                fileName: "photo_1",
+                fileExtension: "heic",
+                fileSizeInMB: 2.3,
+                dateTime: .now,
+                width: 1920,
+                height: 1080,
+                isReviewed: false
+            )
+        ],
+        participants: []
+    )
     static var albums: [AlbumModel] = [
-        AlbumModel(
-            albumName: "Personal",
-            albumPhoto: "album_1",
-            photos: [
-                PhotoModel(
-                    fileName: "photo_1",
-                    fileExtension: "heic",
-                    fileSizeInMB: 2.3,
-                    dateTime: .now,
-                    width: 1920,
-                    height: 1080,
-                    isReviewed: false
-                ),
-                PhotoModel(
-                    fileName: "photo_2",
-                    fileExtension: "heic",
-                    fileSizeInMB: 2.3,
-                    dateTime: .now,
-                    width: 1920,
-                    height: 1080,
-                    isReviewed: false
-                ),
-                PhotoModel(
-                    fileName: "photo_3",
-                    fileExtension: "heic",
-                    fileSizeInMB: 2.3,
-                    dateTime: .now,
-                    width: 1920,
-                    height: 1080,
-                    isReviewed: false
-                ),
-                PhotoModel(
-                    fileName: "photo_4",
-                    fileExtension: "heic",
-                    fileSizeInMB: 2.3,
-                    dateTime: .now,
-                    width: 1920,
-                    height: 1080,
-                    isReviewed: false
-                ),
-                PhotoModel(
-                    fileName: "photo_1",
-                    fileExtension: "heic",
-                    fileSizeInMB: 2.3,
-                    dateTime: .now,
-                    width: 1920,
-                    height: 1080,
-                    isReviewed: false
-                ),
-                PhotoModel(
-                    fileName: "photo_2",
-                    fileExtension: "heic",
-                    fileSizeInMB: 2.3,
-                    dateTime: .now,
-                    width: 1920,
-                    height: 1080,
-                    isReviewed: false
-                ),
-                PhotoModel(
-                    fileName: "photo_3",
-                    fileExtension: "heic",
-                    fileSizeInMB: 2.3,
-                    dateTime: .now,
-                    width: 1920,
-                    height: 1080,
-                    isReviewed: false
-                ),
-                PhotoModel(
-                    fileName: "photo_4",
-                    fileExtension: "heic",
-                    fileSizeInMB: 2.3,
-                    dateTime: .now,
-                    width: 1920,
-                    height: 1080,
-                    isReviewed: false
-                ),
-                PhotoModel(
-                    fileName: "photo_1",
-                    fileExtension: "heic",
-                    fileSizeInMB: 2.3,
-                    dateTime: .now,
-                    width: 1920,
-                    height: 1080,
-                    isReviewed: false
-                ),
-                PhotoModel(
-                    fileName: "photo_2",
-                    fileExtension: "heic",
-                    fileSizeInMB: 2.3,
-                    dateTime: .now,
-                    width: 1920,
-                    height: 1080,
-                    isReviewed: false
-                ),
-                PhotoModel(
-                    fileName: "photo_3",
-                    fileExtension: "heic",
-                    fileSizeInMB: 2.3,
-                    dateTime: .now,
-                    width: 1920,
-                    height: 1080,
-                    isReviewed: false
-                ),
-                PhotoModel(
-                    fileName: "photo_4",
-                    fileExtension: "heic",
-                    fileSizeInMB: 2.3,
-                    dateTime: .now,
-                    width: 1920,
-                    height: 1080,
-                    isReviewed: false
-                )
-            ],
-            participants: [
-                ParticipantModel(username: "stvea", name: "You", profilePicture: "person_1"),
-                ParticipantModel(username: "daffa123", name: "Daffa", profilePicture: "person_2"),
-                ParticipantModel(username: "syafiq111", name: "Syafiq", profilePicture: "person_3"),
-                ParticipantModel(username: "test", name: "Test", profilePicture: "person_4"),
-            ]
-        ),
         AlbumModel(
             albumName: "Apple Developer Academy",
             albumPhoto: "album_1",

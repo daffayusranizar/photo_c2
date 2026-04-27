@@ -15,10 +15,8 @@ final class GridViewModel {
     private var lastColumnCount: Double = 3
     private var isPinching = false
     
-    var images: [PhotoModel] = PhotoModel.personalPhotos
-    
     var albums: [AlbumModel] = AlbumModel.albums
-    
+    var personalAlbum: AlbumModel = AlbumModel.personalAlbums
 
     var columns: [GridItem] {
         Array(

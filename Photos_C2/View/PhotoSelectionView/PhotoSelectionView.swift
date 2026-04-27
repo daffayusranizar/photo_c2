@@ -156,6 +156,10 @@ struct PhotoSelectionView: View {
         let photoId = stackedPhotos[photoIndex].id
         if let originalIndex = selectedAlbum.photos.firstIndex(where: { $0.id == photoId }) {
             selectedAlbum.photos[originalIndex].isReviewed = true
+            
+            if isSave {
+                store.personalAlbum.photos.append(selectedAlbum.photos[originalIndex])
+            }
         }
         
         withAnimation(.easeInOut(duration: 0.2)) {

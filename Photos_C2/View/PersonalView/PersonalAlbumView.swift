@@ -12,46 +12,42 @@ struct PersonalAlbumView: View {
 
     @State private var isSelectMode = false
 
-    var personalAlbum: AlbumModel? {
-        store.getAlbum(byName: "Personal")
-    }
+    @Binding var personalAlbum: AlbumModel
 
     var body: some View {
-        if let personalAlbum = personalAlbum {
-            NavigationStack {
-                ScrollView {
-                    LazyVGrid(columns: store.columns, spacing: 1) {
-                        ForEach(personalAlbum.photos, id: \.id) { image in
-                            let albumId = personalAlbum.id
-                            
-                            if isSelectMode {
-                                SelectPhotoGridCellView(imageInstance: image, isSelected: false)
-                            } else {
-                                PhotoGridCellView(imageInstance: image, albumId: albumId)
-                            }
+        NavigationStack {
+            ScrollView {
+                LazyVGrid(columns: store.columns, spacing: 1) {
+                    ForEach(personalAlbum.photos, id: \.id) { image in
+                        let albumId = personalAlbum.id
+                        
+                        if isSelectMode {
+                            SelectPhotoGridCellView(imageInstance: image, isSelected: false)
+                        } else {
+                            PhotoGridCellView(imageInstance: image, albumId: albumId)
                         }
                     }
                 }
-                .simultaneousGesture(store.pinchGesture)
-                .navigationTitle("Library")
-                .toolbarTitleDisplayMode(.inlineLarge)
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button { } label: {
-                            Image(systemName: "line.3.horizontal.decrease")
-                        }
+            }
+            .simultaneousGesture(store.pinchGesture)
+            .navigationTitle("Library")
+            .toolbarTitleDisplayMode(.inlineLarge)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button { } label: {
+                        Image(systemName: "line.3.horizontal.decrease")
                     }
-                    ToolbarSpacer(placement: .topBarTrailing)
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            withAnimation(.easeInOut) {
-                                isSelectMode.toggle()
-                            }
-                        } label: {
-                            Text(isSelectMode ? "Cancel" : "Select")
+                }
+                ToolbarSpacer(placement: .topBarTrailing)
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        withAnimation(.easeInOut) {
+                            isSelectMode.toggle()
                         }
-                        .fontWeight(.semibold)
+                    } label: {
+                        Text(isSelectMode ? "Cancel" : "Select")
                     }
+                    .fontWeight(.semibold)
                 }
             }
         }
@@ -59,6 +55,6 @@ struct PersonalAlbumView: View {
 }
 
 #Preview {
-    PersonalAlbumView()
+    PersonalAlbumView(personalAlbum: .constant(AlbumModel.personalAlbums))
         .environment(GridViewModel())
 }

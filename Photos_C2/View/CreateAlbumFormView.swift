@@ -11,33 +11,35 @@ import Contacts
 import ContactsUI
 
 struct CreateAlbumFormView: View {
-    @State private var showSheet = true
+    @Environment(GridViewModel.self) private var store
+    @Environment(\.dismiss) var dismiss
+    
     @State private var selectedItems: [PhotosPickerItem] = []
     @State private var selectedImages: [Image] = []
     @State private var albumName: String = ""
     @State private var isOn = false
     @State private var participants: [Participant] = []
     @State private var showContactPicker = false
-
+    
     private let inviterCaption = "Invitation will be sent from Syafiq Fiidzilaalin (theonlyme234@gmail.com)."
-
+    
     private let maxRotation: Double = 10
     private let maxOffset: CGFloat = 50
     private let maxSizeReduction: CGFloat = 45
-//    private let baseSize: CGFloat = 280
+    //    private let baseSize: CGFloat = 280
     private let baseSize: CGFloat = 270
     private let maxImages: Int = 5
-
+    
     private var visibleImages: [Image] {
         Array(selectedImages.prefix(maxImages))
     }
-
+    
     private var stackOrder: [Int] {
         let count = visibleImages.count
         guard count > 0 else { return [] }
         return Array((1..<count).reversed()) + [0]
     }
-
+    
     private func cardStyle(for index: Int) -> (rotation: Double, xOffset: CGFloat, yOffset: CGFloat, size: CGFloat) {
         print("Index: \(index)")
         if index == 0 { return (0, 0, 0, baseSize) }
@@ -62,7 +64,7 @@ struct CreateAlbumFormView: View {
      C = 2
      
      */
-
+    
     @ViewBuilder
     private var participantSection: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -115,7 +117,7 @@ struct CreateAlbumFormView: View {
             }
             .background(Color.gray.opacity(0.2))
             .clipShape(RoundedRectangle(cornerRadius: 30))
-
+            
             Text(inviterCaption)
                 .font(.footnote)
                 .foregroundStyle(.gray)
@@ -123,10 +125,10 @@ struct CreateAlbumFormView: View {
         }
         .padding(.horizontal)
     }
-
+    
     private struct ParticipantRow: View {
         let participant: Participant
-
+        
         var body: some View {
             HStack(spacing: 12) {
                 ZStack {
@@ -142,7 +144,7 @@ struct CreateAlbumFormView: View {
                 }
                 .frame(width: 40, height: 40)
                 .clipShape(Circle())
-
+                
                 VStack(alignment: .leading, spacing: 2) {
                     Text(participant.name)
                         .font(.body)
@@ -157,16 +159,16 @@ struct CreateAlbumFormView: View {
                 Spacer()
             }
         }
-
+        
         private var initial: String {
             String(participant.name.prefix(1)).uppercased()
         }
-
+        
         private var subline: String? {
             participant.phone ?? participant.email
         }
     }
-
+    
     @ViewBuilder
     private var thumbnailView: some View {
         VStack {
@@ -204,78 +206,102 @@ struct CreateAlbumFormView: View {
                 }
             }
             else {
-                        RoundedRectangle(cornerRadius: 20)
-                        .fill(Color.gray)
-                        .frame(width: 300, height: 300)
-                            }
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color.gray)
+                    .frame(width: 300, height: 300)
+            }
         }
     }
     
-        var body: some View {
-            Button("Buka gweh king") {
-                showSheet = true
-            }
-            .sheet(isPresented: $showSheet) {
-                NavigationStack {
-                    VStack (spacing: 20){
-                       thumbnailView
-                        PhotosPicker(selection: $selectedItems, maxSelectionCount: 0, matching: .images) {
-                            Text("Add Photos")
-                        }
-                        TextField("Album Name", text: $albumName)
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack (spacing: 20){
+                    thumbnailView
+                    PhotosPicker(selection: $selectedItems, maxSelectionCount: 0, matching: .images) {
+                        Text("Add Photos")
+                    }
+                    TextField("Album Name", text: $albumName)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .clipShape(RoundedRectangle(cornerRadius: 30))
+                        .padding(.horizontal)
+                    participantSection
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Toggle("Allow Adding Photos", isOn: $isOn)
                             .padding()
                             .background(Color.gray.opacity(0.2))
                             .clipShape(RoundedRectangle(cornerRadius: 30))
                             .padding(.horizontal)
-                        participantSection
-                        
-                        VStack(alignment: .leading, spacing: 8) {
-                                        Toggle("Allow Adding Photos", isOn: $isOn)
-                                            .padding()
-                                            .background(Color.gray.opacity(0.2))
-                                            .clipShape(RoundedRectangle(cornerRadius: 30))
-                                            .padding(.horizontal)
-                                    }
                     }
-                    .onChange(of: selectedItems) { oldValue, newValue in
-                        Task {
-                            var newImages: [Image] = []
-                            for item in newValue {
-                                if let data = try? await item.loadTransferable(type: Data.self),
-                                   let uiImage = UIImage(data: data) {
-                                    newImages.append(Image(uiImage: uiImage))
-                                }
-                            }
-                            selectedImages = newImages
-                        }
-                    }
-                    .sheet(isPresented: $showContactPicker) {
-                        ContactPicker { picked in
-                            for p in picked where !participants.contains(p) {
-                                participants.append(p)
-                            }
-                        }
-                    }
-                        .navigationTitle(Text("Create Album"))
-                        .navigationBarTitleDisplayMode(.inline)
-                        .toolbar {
-                            ToolbarItem(placement: .topBarLeading) {
-                                Button{
-                                    showSheet = false
-                                } label: {
-                                    Image(systemName: "xmark")
-                                }
-                            }
-                            ToolbarItem(placement: .topBarTrailing){
-                                Button("Create") {
-                                    showSheet = false
-                                }
-                            }
-                        }
                 }
-                .presentationDetents([.large])
+            }
+            .onChange(of: selectedItems) { oldValue, newValue in
+                Task {
+                    var newImages: [Image] = []
+                    for item in newValue {
+                        if let data = try? await item.loadTransferable(type: Data.self),
+                           let uiImage = UIImage(data: data) {
+                            newImages.append(Image(uiImage: uiImage))
+                        }
+                    }
+                    selectedImages = newImages
+                }
+            }
+            .sheet(isPresented: $showContactPicker) {
+                ContactPicker { picked in
+                    for p in picked where !participants.contains(p) {
+                        participants.append(p)
+                    }
+                }
+            }
+            .navigationTitle(Text("Create Album"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button{
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+                }
+                ToolbarItem(placement: .topBarTrailing){
+                    Button("Create") {                        let mappedParticipants = participants.map { p in
+                            ParticipantModel(
+                                username: p.email ?? p.phone ?? p.name.lowercased().replacingOccurrences(of: " ", with: "."),
+                                name: p.name,
+                                profilePicture: ""
+                            )
+                        }
+                        let mappedPhotos = selectedItems.indices.map { index in
+                            PhotoModel(
+                                fileName: "dummy_photo_\(index + 1)", // should be using real uploaded photos
+                                fileExtension: "jpg",
+                                fileSizeInMB: 0.0,
+                                dateTime: Date(),
+                                width: Int(baseSize),
+                                height: Int(baseSize),
+                                isReviewed: false
+                            )
+                        }
+
+                        let newAlbum = AlbumModel(
+                            albumName: albumName,
+                            albumPhoto: "dummy_photo_1", // Default cover, should be obtained from the first photo uploaded
+                            photos: mappedPhotos,
+                            participants: mappedParticipants
+                        )
+                        
+                        store.addAlbum(newAlbum)
+                        dismiss()
+                    }
+                    .disabled(albumName.isEmpty)
+                }
             }
         }
+        .presentationDetents([.large])
+    }
 }
 
 struct Participant: Identifiable, Hashable {
@@ -283,11 +309,11 @@ struct Participant: Identifiable, Hashable {
     let name: String
     let phone: String?
     let email: String?
-
+    
     static func == (lhs: Participant, rhs: Participant) -> Bool {
         lhs.name == rhs.name && lhs.phone == rhs.phone
     }
-
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(name)
         hasher.combine(phone)
@@ -296,27 +322,27 @@ struct Participant: Identifiable, Hashable {
 
 struct ContactPicker: UIViewControllerRepresentable {
     let onPick: ([Participant]) -> Void
-
+    
     func makeUIViewController(context: Context) -> CNContactPickerViewController {
         let picker = CNContactPickerViewController()
         picker.delegate = context.coordinator
         picker.predicateForEnablingContact = NSPredicate(format: "phoneNumbers.@count > 0 OR emailAddresses.@count > 0")
         return picker
     }
-
+    
     func updateUIViewController(_ uiViewController: CNContactPickerViewController, context: Context) {}
-
+    
     func makeCoordinator() -> Coordinator {
         Coordinator(onPick: onPick)
     }
-
+    
     class Coordinator: NSObject, CNContactPickerDelegate {
         let onPick: ([Participant]) -> Void
-
+        
         init(onPick: @escaping ([Participant]) -> Void) {
             self.onPick = onPick
         }
-
+        
         func contactPicker(_ picker: CNContactPickerViewController, didSelect contacts: [CNContact]) {
             let mapped = contacts.compactMap { contact -> Participant? in
                 let composedName = "\(contact.givenName) \(contact.familyName)"

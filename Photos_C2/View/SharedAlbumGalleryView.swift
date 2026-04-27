@@ -96,11 +96,28 @@ struct ParticipantAvatar: View {
     
     var body: some View {
         VStack(spacing: 6) {
-            Image(imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
+            if imageName == "" {
+                ZStack {
+                    LinearGradient(
+                        colors: [Color.blue, Color.purple],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                    Text(String(name.prefix(1)).uppercased())
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.white)
+                }
                 .frame(width: 60, height: 60)
                 .clipShape(Circle())
+                
+            } else {
+                Image(imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 60, height: 60)
+                    .clipShape(Circle())
+            }
             
             Text(name)
                 .font(.system(size: 12, weight: .regular))
