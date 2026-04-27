@@ -9,7 +9,9 @@ import SwiftUI
 
 struct SharedAlbumGalleryView: View {
     @Environment(\.dismiss) var dismiss
-        
+    @State private var viewModel = GridViewModel()
+    @State private var isSelectMode = false
+    
     let album: AlbumModel
     @State private var columnCount: Double = 3
     @State private var lastColumnCount: Double = 3
@@ -35,43 +37,55 @@ struct SharedAlbumGalleryView: View {
                     }
                     .padding(.bottom, 16)
                     
-                    ZStack {
-                        Image(album.albumPhoto)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(height: 220)
-                            .clipped()
-                        
-                        Button(action: {
-                            // Review action
-                        }) {
-                            Text("Review this album")
-                                .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(.black)
-                                .padding(.horizontal, 24)
-                                .padding(.vertical, 12)
-                                .background(.ultraThinMaterial)
-                                .clipShape(Capsule())
-                        }
+                    NavigationLink(destination: PhotoSelectionView(album: album)) {
+                        ZStack {
+                            Image(album.albumPhoto)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(height: 220)
+                                .clipped()
+                                Text("Review this album")
+                                    .font(.system(size: 16, weight: .semibold))
+                                    .foregroundColor(.black)
+                                    .padding(.horizontal, 24)
+                                    .padding(.vertical, 12)
+                                    .background(.ultraThinMaterial)
+                                    .clipShape(Capsule())
+                            }
                     }
                     
-                    LazyVGrid(columns: columns, spacing: 1) {
-                        ForEach(album.photos) { image in
-                            Image(image.fileName)
-                                .resizable()
-                                .border(Color.black.opacity(0.9), width: isPinching ? 4 : 0)
-                                .aspectRatio(contentMode: .fill)
-                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                                .aspectRatio(1, contentMode: .fit)
-                                .clipped()
-                                .clipShape(RoundedRectangle(cornerRadius: 2))
+                    ScrollView {
+                        LazyVGrid(columns: viewModel.columns, spacing: 1) {
+                            ForEach(album.photos) { image in
+                                if isSelectMode {
+                                    SelectPhotoGridCellView(imageInstance: image, isSelected: false)
+                                } else {
+                                    PhotoGridCellView(imageInstance: image)
+                                }
+                            }
                         }
                     }
+                    .simultaneousGesture(viewModel.pinchGesture)
                 }
             }
         }
-        .navigationTitle(album.albumName)
-        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(album.albumName)
+                    .font(.title)
+                    .fontWeight(.semibold)
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    withAnimation(.easeInOut) {
+                        isSelectMode.toggle()
+                    }
+                } label: {
+                    Text(isSelectMode ? "Cancel" : "Select")
+                }
+                .fontWeight(.semibold)
+            }
+        }
     }
 }
 

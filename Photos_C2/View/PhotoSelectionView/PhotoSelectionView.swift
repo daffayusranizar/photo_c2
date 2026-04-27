@@ -8,9 +8,16 @@
 import SwiftUI
 
 struct PhotoSelectionView: View {
-    @State var selectedAlbum: AlbumModel = AlbumModel.albums[0]
-    @State private var stackedPhotos: [PhotoModel] = AlbumModel.albums[0].photos
-    @State private var participants: [ParticipantModel] = AlbumModel.albums[0].participants
+    @State private var selectedAlbum: AlbumModel
+    @State private var stackedPhotos: [PhotoModel]
+    @State private var participants: [ParticipantModel]
+
+    init(album: AlbumModel) {
+        _selectedAlbum = State(initialValue: album)
+        _stackedPhotos = State(initialValue: album.photos)
+        _participants  = State(initialValue: album.participants)
+    }
+    
     @State private var offset: CGSize = .zero
     @State private var isAnimating: Bool = false
 
@@ -105,11 +112,6 @@ struct PhotoSelectionView: View {
             
             
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button { } label: {
-                        Image(systemName: "chevron.left")
-                    }
-                }
                 ToolbarItem(placement: .principal) {
                     Text(selectedAlbum.albumName)
                         .font(.title)
@@ -124,8 +126,11 @@ struct PhotoSelectionView: View {
                     .fontWeight(.semibold)
                 }
             }
+            
+            .toolbarVisibility(.hidden, for: .tabBar)
         }
     }
+    
 
     private func dragGesture() -> some Gesture {
         DragGesture()
@@ -160,5 +165,5 @@ struct PhotoSelectionView: View {
 }
 
 #Preview {
-    PhotoSelectionView()
+    PhotoSelectionView(album: AlbumModel.albums.first!)
 }
